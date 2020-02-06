@@ -1,10 +1,13 @@
 package com.example.routes;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,8 +60,26 @@ public class GetDirectionData extends AsyncTask<Object, String, String> {
                 .snippet("Distance: " + distance);
         mMap.addMarker(markerOptions);
 
+        if(MainActivity.DIRECTION_REQUESTED){
+            String[] directionsList;
+            DataParser directionParser = new DataParser();
+            directionsList = directionParser.parseDirections(s);
+            displayDirections(directionsList);
+        }
+
     }
 
+    private void displayDirections(String[] directionsList){
+        int count = directionsList.length;
+
+        for(int i=0; i<count; i++){
+            PolylineOptions options = new PolylineOptions()
+                    .color(Color.RED)
+                    .width(10)
+                    .addAll(PolyUtil.decode(directionsList[i]));
+            mMap.addPolyline(options);
+        }
+    }
 
 
 

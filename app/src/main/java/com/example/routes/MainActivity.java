@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationCallback locationCallback;
     LocationRequest locationRequest;
 
+    public static boolean DIRECTION_REQUESTED;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
 
             case R.id.btn_distance:
+            case R.id.btn_direction:
                 dataTransfer = new Object[3];
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = getDirectionUrl();
@@ -189,6 +192,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 GetDirectionData getDirectionData = new GetDirectionData();
                 // execute asynchronously
                 getDirectionData.execute(dataTransfer);
+
+                if(view.getId() == R.id.btn_direction)
+                    DIRECTION_REQUESTED = true;
+                else
+                    DIRECTION_REQUESTED = false;
+
                 break;
 
         }
