@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         placeUrl.append("location="+lat+","+lng);
         placeUrl.append("&radius="+RADIUS);
         placeUrl.append("&type="+nearByPlace);
-        placeUrl.append("&key="+getString(R.string.api_key));
+        placeUrl.append("&key="+getString(R.string.api_key_places));
         return placeUrl.toString();
     }
 
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         StringBuilder directionUrl = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
         directionUrl.append("origin=" + userLocation.latitude + "," + userLocation.longitude);
         directionUrl.append("&destination=" + destinationLocation.latitude + "," + destinationLocation.longitude);
-        directionUrl.append("&key=" + getString(R.string.api_key));
+        directionUrl.append("&key=" + getString(R.string.api_key_places));
         return directionUrl.toString();
 
     }
